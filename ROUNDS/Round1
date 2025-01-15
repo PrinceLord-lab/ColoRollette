@@ -1,32 +1,29 @@
-   void RoundOne(){
+void RoundOne() {
+  
+  int leds[] = {Red1, Yellow1, Blue1, Green1};
+ 
 
-  PlayButton1 = digitalRead(PlayButton);
-  
-     
-  while( PlayButton1 == LOW ) {
+  for (int i = 0; i < numLeds; i++) {
    
-    digitalWrite(Red1,HIGH);
-    delay(200);
-    if (PlayButton1 = digitalRead(PlayButton)== HIGH)break;
-    digitalWrite(Red1,LOW);
-    delay(200);
-     digitalWrite(Green1,HIGH);
-    delay(200);
-    if (PlayButton1 = digitalRead(PlayButton)== HIGH) break;
-    digitalWrite(Green1,LOW);
-    delay(200);
-     digitalWrite(Blue1,HIGH);
-    delay(200);
-   if (PlayButton1 = digitalRead(PlayButton)== HIGH) break;
-    digitalWrite(Blue1,LOW);
-    delay(200);
-     digitalWrite(Yellow1,HIGH);
-    delay(200);
-    if (PlayButton1 = digitalRead(PlayButton)== HIGH) break;
-    digitalWrite(Yellow1,LOW);
-    delay(200);
-    
-    
-    
-  
+    turnOffAllLeds();
+
+   
+    digitalWrite(leds[i], HIGH);
+
+   
+    if (digitalRead(PlayButton) == HIGH) {
+      while (digitalRead(PlayButton) == HIGH) {
+        delay(10); 
+      }
+      ResultGameOne = leds[i]; 
+      delay(200); 
+      blinkSelectedLed(leds[i]);
+      return; 
+    }
+
+    delay(500); 
+  }
+}
+
+
 }
