@@ -1,0 +1,39 @@
+void blinkinglights(){
+
+    for (int i = 0; i < 3; i++)
+    {
+        digitalWrite(Green1,HIGH);
+        digitalWrite(Green2,HIGH);
+        digitalWrite(Green3,HIGH);
+        digitalWrite(Red1,HIGH);
+        digitalWrite(Red2,HIGH);
+        digitalWrite(Red3,HIGH);
+        digitalWrite(Yellow1,HIGH);
+        digitalWrite(Yellow2,HIGH);
+        digitalWrite(Yellow3,HIGH);
+        digitalWrite(Blue1,HIGH);
+        digitalWrite(Blue2,HIGH);
+        digitalWrite(Blue3,HIGH);
+
+        delay(500);
+
+         digitalWrite(Green1,LOW);
+        digitalWrite(Green2,LOW);
+        digitalWrite(Green3,LOW);
+        digitalWrite(Red1,LOW);
+        digitalWrite(Red2,LOW);
+        digitalWrite(Red3,LOW);
+        digitalWrite(Yellow1,LOW);
+        digitalWrite(Yellow2,LOW);
+        digitalWrite(Yellow3,LOW);
+        digitalWrite(Blue1,LOW);
+        digitalWrite(Blue2,LOW);
+        digitalWrite(Blue3,LOW);
+
+        
+        
+
+    }
+    
+   
+  
