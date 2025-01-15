@@ -21,6 +21,7 @@
 
     const int numLeds = 9;
     const int maxColor = 3;
+int PlayButton1 = 0;
 void setup() {
   // put your setup code here, to run once:
     pinMode (Green1,OUTPUT);
