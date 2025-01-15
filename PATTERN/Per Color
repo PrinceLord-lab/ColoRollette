@@ -1,0 +1,47 @@
+void perColor (){
+  int Blue[] = {Blue1, Blue2, Blue3 };
+  int Green[] = {Green1, Green2, Green3 };
+  int Red[] = { Red1, Red2 , Red3 };
+  int Yellow[] = {Yellow1, Yellow2, Yellow3 };
+
+// Blue Leds
+for (int i = 0; i < 3; i++) {
+    digitalWrite(Blue[i], HIGH);
+  }
+  delay(300);
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Blue[i], LOW);
+  }
+  delay(300);
+
+ // Green Leds
+ for (int i = 0; i < 3; i++) {
+    digitalWrite(Green[i], HIGH);
+  }
+  delay(300);
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Green[i], LOW);
+  }
+  delay(300);
+
+  // Red LEDs
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Red[i], HIGH);
+  }
+  delay(300);
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Red[i], LOW);
+  }
+  delay(300);
+
+  //  Yellow LEDs
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Yellow[i], HIGH);
+  }
+  delay(300);
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(Yellow[i], LOW);
+  }
+  delay(300);
+
+}
