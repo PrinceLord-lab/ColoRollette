@@ -21,6 +21,8 @@
 
   //Variables
   int ResultGameOne = 0;
+  int ResultGameTwo = 0;
+  int ResultGameThree = 0;
 void setup() {
   // put your setup code here, to run once:
     pinMode (Green1,OUTPUT);
