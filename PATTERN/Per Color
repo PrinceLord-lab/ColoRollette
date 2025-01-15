@@ -1,4 +1,4 @@
-void perColor (){
+void PerColor (){
   int Blue[] = {Blue1, Blue2, Blue3 };
   int Green[] = {Green1, Green2, Green3 };
   int Red[] = { Red1, Red2 , Red3 };
