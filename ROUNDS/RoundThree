@@ -11,7 +11,7 @@ void RoundThree(){
         while (digitalRead(PlayButton) == HIGH){
             delay (10);
         }
-        ResultGameTwo = leds[i];
+        ResultGameThree = leds[i];
         delay (200);
         blinkSelectedLed(leds[i]);
         delay(200);
