@@ -26,21 +26,5 @@ void RoundOne() {
   }
 }
 
-// Helper function to turn off all LEDs
-void turnOffAllLeds() {
-  digitalWrite(Red1, LOW);
-  digitalWrite(Yellow1, LOW);
-  digitalWrite(Blue1, LOW);
-  digitalWrite(Green1, LOW);
-}
 
-// Function to blink the selected LED for at least 3 seconds
-void blinkSelectedLed(int ledPin) {
-  unsigned long startTime = millis(); // Record the start time
-  while (millis() - startTime < 3000) { // Run for 3 seconds
-    digitalWrite(ledPin, HIGH);  // Turn the LED on
-    delay(250);                  // Wait for 250ms
-    digitalWrite(ledPin, LOW);   // Turn the LED off
-    delay(250);                  // Wait for 250ms
-  }
 }
