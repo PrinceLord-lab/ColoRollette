@@ -25,6 +25,31 @@ void Spiral (){
         digitalWrite(Blue1,HIGH);
         delay(150);
 
+        digitalWrite(Blue1,LOW);
+        delay(150);
+        digitalWrite(Green2,LOW);
+        delay(150);
+        digitalWrite(Green1,LOW);
+        delay(150);
+        digitalWrite(Red2,LOW);
+        delay(150);
+        digitalWrite(Red1,LOW);
+        delay(150);
+        digitalWrite(Yellow2,LOW);
+        delay(150);
+        digitalWrite(Yellow1,LOW);
+        delay(150);
+        digitalWrite(Blue2,LOW);
+        delay(150);
+        digitalWrite(Blue3,LOW);
+        delay(150);
+        digitalWrite(Green3,LOW);
+        delay(150);
+        digitalWrite(Red3,LOW);
+        delay(150);
+        digitalWrite(Yellow3,LOW);
+        delay(150);
+
         
  }
 
