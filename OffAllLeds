@@ -1,0 +1,16 @@
+void OffAllLeds () {
+        digitalWrite(Green1,LOW);
+        digitalWrite(Green2,LOW);
+        digitalWrite(Green3,LOW);
+        digitalWrite(Red1,LOW);
+        digitalWrite(Red2,LOW);
+        digitalWrite(Red3,LOW);
+        digitalWrite(Yellow1,LOW);
+        digitalWrite(Yellow2,LOW);
+        digitalWrite(Yellow3,LOW);
+        digitalWrite(Blue1,LOW);
+        digitalWrite(Blue2,LOW);
+        digitalWrite(Blue3,LOW);
+
+        delay(500);
+}
