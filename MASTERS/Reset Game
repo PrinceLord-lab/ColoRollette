@@ -1,0 +1,32 @@
+void resetGame() {
+  while (true) {
+    int pattern = random(5); // Randomly choose a pattern (0, 1, or 2)
+    switch (pattern) {
+      case 0:
+        PerCircle1();
+        break;
+      case 1:
+        Spiral();
+        break;
+      case 2:
+        PerCircle2();
+        break;
+      case 3:
+        Slant();
+        break;
+      case 4:
+        PerColor();
+        break;
+    
+    }
+
+    // Play Button for Play
+    if (digitalRead(PlayButton) == HIGH) {
+      while (digitalRead(PlayButton) == HIGH) {
+        delay(10); 
+      }
+      return;  
+    }
+  }
+}
+
