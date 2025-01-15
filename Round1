@@ -1,28 +1,28 @@
-void RoundOne(){
+   void RoundOne(){
 
   PlayButton1 = digitalRead(PlayButton);
   
      
-  while( PlayButton1 == HIGH ) {
+  while( PlayButton1 == LOW ) {
    
     digitalWrite(Red1,HIGH);
     delay(200);
-    PlayButton1 = digitalRead(PlayButton);
+    if (PlayButton1 = digitalRead(PlayButton)== HIGH)break;
     digitalWrite(Red1,LOW);
     delay(200);
      digitalWrite(Green1,HIGH);
     delay(200);
-    PlayButton1 = digitalRead(PlayButton);
+    if (PlayButton1 = digitalRead(PlayButton)== HIGH) break;
     digitalWrite(Green1,LOW);
     delay(200);
      digitalWrite(Blue1,HIGH);
     delay(200);
-    PlayButton1 = digitalRead(PlayButton);
+   if (PlayButton1 = digitalRead(PlayButton)== HIGH) break;
     digitalWrite(Blue1,LOW);
     delay(200);
      digitalWrite(Yellow1,HIGH);
     delay(200);
-    PlayButton1 = digitalRead(PlayButton);
+    if (PlayButton1 = digitalRead(PlayButton)== HIGH) break;
     digitalWrite(Yellow1,LOW);
     delay(200);
     
