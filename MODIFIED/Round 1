@@ -1,7 +1,7 @@
 void RoundOne() {
   // Array for round 1 LEDs in the correct sequence: Red, Yellow, Blue, Green
   int leds[] = {Red1, Yellow1, Blue1, Green1};
-  const int numLeds = 4; // Number of LEDs in round 1
+ 
 
   for (int i = 0; i < numLeds; i++) {
     // Turn off all LEDs before turning on the current one
