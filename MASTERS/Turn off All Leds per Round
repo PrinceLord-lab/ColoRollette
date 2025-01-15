@@ -1,0 +1,6 @@
+void turnOffAllLeds() {
+  digitalWrite(Red1, LOW);
+  digitalWrite(Yellow1, LOW);
+  digitalWrite(Blue1, LOW);
+  digitalWrite(Green1, LOW);
+}
