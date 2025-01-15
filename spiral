@@ -1,0 +1,122 @@
+void Spiral (){
+
+        digitalWrite (Yellow3,HIGH);
+        delay(250);
+        digitalWrite (Yellow3,;LOW);
+        delay(250);
+
+         digitalWrite (Red3,HIGH);
+        delay(250);
+        digitalWrite (Red3,;LOW);
+        delay(250);
+
+         digitalWrite (Green3,HIGH);
+        delay(250);
+        digitalWrite (Green3,;LOW);
+        delay(250);
+
+         digitalWrite (Blue3,HIGH);
+        delay(250);
+        digitalWrite (Blue3,;LOW);
+        delay(250);
+
+         digitalWrite (Blue2,HIGH);
+        delay(250);
+        digitalWrite (Blue2,;LOW);
+        delay(250);
+
+         digitalWrite (Yellow2,HIGH);
+        delay(250);
+        digitalWrite (Yellow2,;LOW);
+        delay(250);
+
+     digitalWrite (Yellow1,HIGH);
+        delay(250);
+        digitalWrite (Yellow1,;LOW);
+        delay(250);
+
+         digitalWrite (Red1,HIGH);
+        delay(250);
+        digitalWrite (Red1,;LOW);
+        delay(250);
+
+         digitalWrite (Red2,HIGH);
+        delay(250);
+        digitalWrite (Red2,;LOW);
+        delay(250);
+
+         digitalWrite (Green1,HIGH);
+        delay(250);
+        digitalWrite (Green1,;LOW);
+        delay(250);
+
+         digitalWrite (Green2,HIGH);
+        delay(250);
+        digitalWrite (Green2,;LOW);
+        delay(250);
+
+         digitalWrite (Blue1,HIGH);
+        delay(250);
+        digitalWrite (Blue1,;LOW);
+        delay(500);
+        digitalWrite (Blue1,HIGH);
+        delay(250);
+        digitalWrite (Blue1,;LOW);
+        delay(250);
+
+         digitalWrite (Green2,HIGH);
+        delay(250);
+        digitalWrite (Green2,;LOW);
+        delay(250);
+
+        digitalWrite (Green1,HIGH);
+        delay(250);
+        digitalWrite (Green1,;LOW);
+        delay(250);
+
+        digitalWrite (Red2,HIGH);
+        delay(250);
+        digitalWrite (Red2,;LOW);
+        delay(250);
+
+        digitalWrite (Red1,HIGH);
+        delay(250);
+        digitalWrite (Red1,;LOW);
+        delay(250);
+
+        digitalWrite (Yellow1,HIGH);
+        delay(250);
+        digitalWrite (Yellow1,;LOW);
+        delay(250);
+
+     digitalWrite (Yellow2,HIGH);
+        delay(250);
+        digitalWrite (Yellow2,;LOW);
+        delay(250);
+
+
+    digitalWrite (Blue2,HIGH);
+        delay(250);
+        digitalWrite (Blue2,;LOW);
+        delay(250);
+
+    digitalWrite (Blue3,HIGH);
+        delay(250);
+        digitalWrite (Blue3,;LOW);
+        delay(250);
+
+    digitalWrite (Green3,HIGH);
+        delay(250);
+        digitalWrite (Green3,;LOW);
+        delay(250);
+
+    digitalWrite (Red3,HIGH);
+        delay(250);
+        digitalWrite (Red3,;LOW);
+        delay(250);
+
+    digitalWrite (Yellow3,HIGH);
+        delay(250);
+        digitalWrite (Yellow3,;LOW);
+        delay(250);
+ }
