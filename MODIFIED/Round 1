@@ -1,0 +1,46 @@
+void RoundOne() {
+  // Array for round 1 LEDs in the correct sequence: Red, Yellow, Blue, Green
+  int leds[] = {Red1, Yellow1, Blue1, Green1};
+  const int numLeds = 4; // Number of LEDs in round 1
+
+  for (int i = 0; i < numLeds; i++) {
+    // Turn off all LEDs before turning on the current one
+    turnOffAllLeds();
+
+    // Turn on the current LED
+    digitalWrite(leds[i], HIGH);
+
+    // Check if PlayButton is pressed
+    if (digitalRead(PlayButton) == HIGH) {
+      // Wait for button release to avoid multiple triggers
+      while (digitalRead(PlayButton) == HIGH) {
+        delay(10); // Small delay to avoid bouncing
+      }
+      ResultGameOne = leds[i]; // Save the currently lit LED to ResultGameOne
+      delay(200); // Short delay to ensure button release is detected
+      blinkSelectedLed(leds[i]); // Blink the selected LED for at least 3 seconds
+      return; // Exit the function, stopping the loop
+    }
+
+    delay(500); // Wait for visibility
+  }
+}
+
+// Helper function to turn off all LEDs
+void turnOffAllLeds() {
+  digitalWrite(Red1, LOW);
+  digitalWrite(Yellow1, LOW);
+  digitalWrite(Blue1, LOW);
+  digitalWrite(Green1, LOW);
+}
+
+// Function to blink the selected LED for at least 3 seconds
+void blinkSelectedLed(int ledPin) {
+  unsigned long startTime = millis(); // Record the start time
+  while (millis() - startTime < 3000) { // Run for 3 seconds
+    digitalWrite(ledPin, HIGH);  // Turn the LED on
+    delay(250);                  // Wait for 250ms
+    digitalWrite(ledPin, LOW);   // Turn the LED off
+    delay(250);                  // Wait for 250ms
+  }
+}
