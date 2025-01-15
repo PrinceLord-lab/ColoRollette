@@ -1,0 +1,56 @@
+void Slant(){
+int slant1[] = {Blue1, Green2, Green1};
+int slant2[] = {Blue3, Green3};
+int slant3[] = {Blue2, Red2};
+int slant4[] = {Red3, Yellow3};
+int slant5[] = {Yellow2, Yellow1, Red1};
+
+//three cycles
+for (int cycle = 0; cycle < 3; cycle++) {
+  //Slant 1
+   for (int i = 0; i < 3; i++) {
+      digitalWrite(slant1[i], HIGH);
+    }
+    delay(200); 
+    for (int i = 0; i < 3; i++) {
+      digitalWrite(slant1[i], LOW);
+    }
+
+
+//slant 2
+ for (int i = 0; i < 2; i++) {
+      digitalWrite(slant2[i], HIGH);
+    }
+    delay(200);  
+     for (int i = 0; i < 2; i++) {
+      digitalWrite(slant2[i], LOW);
+    }
+
+//slant 3
+ for (int i = 0; i < 2; i++) {
+      digitalWrite(slant3[i], HIGH);
+    }
+    delay(200);
+    for (int i = 0; i < 2; i++) {
+      digitalWrite(slant3[i], LOW);
+    }
+
+//slant 4
+ for (int i = 0; i < 2; i++) {
+      digitalWrite(slant4[i], HIGH);
+    }
+    delay(200);
+    for (int i = 0; i < 2; i++) {
+      digitalWrite(slant4[i], LOW);
+    }
+    
+//slant 5
+ for (int i = 0; i < 4; i++) {
+      digitalWrite(slant5[i], HIGH);
+    }
+    delay(200); 
+     for (int i = 0; i < 4; i++) {
+      digitalWrite(slant5[i], LOW);
+    }
+    } 
+}
