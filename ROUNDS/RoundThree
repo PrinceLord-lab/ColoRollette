@@ -1,0 +1,23 @@
+void RoundThree(){
+
+    int leds [] = {Red1, Yellow1, Blue1, Green1};
+    
+    for (size_t i = 0; i < numLeds; i++)
+    {
+        turnOffAllLeds();
+    }
+
+    if (digitalRead(PlayButton) == HIGH){
+        while (digitalRead(PlayButton) == HIGH){
+            delay (10);
+        }
+        ResultGameTwo = leds[i];
+        delay (200);
+        blinkSelectedLed(leds[i]);
+        delay(200);
+        return;
+    }
+    delay(500);
+    
+
+}
