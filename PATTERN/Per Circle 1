@@ -1,0 +1,54 @@
+void PerCircleOne() {
+
+  int Circle1[] = {Green1, Yellow1, Blue1, Red1};
+  int Circle2[] = {Green2, Yellow2, Blue2, Red2};
+  int Circle3[] = {Green3, Yellow3, Blue3, Red3};
+
+  //  three cycles
+  for (int cycle = 0; cycle < 3; cycle++) {
+    // Turn on Circle 1
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle1[i], HIGH);
+    }
+    delay(300);
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle1[i], LOW);
+    }
+
+    // Turn on Circle 2
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle2[i], HIGH);
+    }
+    delay(300);
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle2[i], LOW);
+    }
+
+    // Turn on Circle 3
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle3[i], HIGH);
+    }
+    delay(300);
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle3[i], LOW);
+    }
+
+    // Turn on Circle 2 again
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle2[i], HIGH);
+    }
+    delay(300);
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle2[i], LOW);
+    }
+
+    // Turn on Circle 1 again
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle1[i], HIGH);
+    }
+    delay(300);
+    for (int i = 0; i < 4; i++) {
+      digitalWrite(Circle1[i], LOW);
+    }
+  }
+}
