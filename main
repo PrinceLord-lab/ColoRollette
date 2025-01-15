@@ -23,6 +23,7 @@
   int ResultGameOne = 0;
   int ResultGameTwo = 0;
   int ResultGameThree = 0;
+ const int numLeds = 4; // Number of LEDs in round 
 void setup() {
   // put your setup code here, to run once:
     pinMode (Green1,OUTPUT);
