@@ -1,0 +1,25 @@
+void RoundOne(){
+
+  bool i = true;
+  while ( i = PlayButton ) {
+    digitalWrite(Red1,HIGH);
+    delay(200);
+    digitalWrite(Red1,LOW);
+    delay(200);
+     digitalWrite(Green1,HIGH);
+    delay(200);
+    digitalWrite(Green1,LOW);
+    delay(200)
+     digitalWrite(Blue1,HIGH);
+    delay(200);
+    digitalWrite(Blue1,LOW);
+    delay(200)
+     digitalWrite(Yellow1,HIGH);
+    delay(200);
+    digitalWrite(Yellow1,LOW);
+    delay(200)
+    
+    
+    }
+  
+}
