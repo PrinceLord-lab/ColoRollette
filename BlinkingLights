@@ -1,7 +1,8 @@
-void blinkinglights(){
+void BlinkingLights(){
 
     for (int i = 0; i < 3; i++)
     {
+        delay(500);
         digitalWrite(Green1,HIGH);
         digitalWrite(Green2,HIGH);
         digitalWrite(Green3,HIGH);
@@ -30,7 +31,7 @@ void blinkinglights(){
         digitalWrite(Blue2,LOW);
         digitalWrite(Blue3,LOW);
 
-        
+        delay(500);
         
 
     }
