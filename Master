@@ -19,9 +19,8 @@
   const int ResetButton = A0;
   const int PlayButton = A1;
 
-    const int numLeds = 9;
-    const int maxColor = 3;
-int PlayButton1 = 0;
+  //Variables
+  int ResultGameOne = 0;
 void setup() {
   // put your setup code here, to run once:
     pinMode (Green1,OUTPUT);
