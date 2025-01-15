@@ -1,4 +1,4 @@
-void resetGame() {
+void ResetGame() {
   while (true) {
     int pattern = random(5); // Randomly choose a pattern (0, 1, or 2)
     switch (pattern) {
