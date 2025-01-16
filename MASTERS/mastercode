@@ -163,9 +163,14 @@ int RunRound(int roundNumber) {
             break;
         case 2:
             leds[0] = Red2; leds[1] = Yellow2; leds[2] = Blue2; leds[3] = Green2;
+            // Keep Round 1's LED on
+            digitalWrite(ResultGameOne, HIGH);
             break;
         case 3:
             leds[0] = Red3; leds[1] = Yellow3; leds[2] = Blue3; leds[3] = Green3;
+            // Keep Round 1 and 2's LEDs on
+            digitalWrite(ResultGameOne, HIGH);
+            digitalWrite(ResultGameTwo, HIGH);
             break;
     }
 
@@ -173,7 +178,10 @@ int RunRound(int roundNumber) {
     int currentLed = 0;
 
     while (!buttonPressed) {
-        turnOffAllLeds();
+        // Turn off current round's LEDs only
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(leds[i], LOW);
+        }
         digitalWrite(leds[currentLed], HIGH);
         
         if (digitalRead(PlayButton) == HIGH) {
@@ -186,6 +194,7 @@ int RunRound(int roundNumber) {
         currentLed = (currentLed + 1) % numLeds;
     }
 
+    turnOffAllLeds();
     return result;
 }
 
