@@ -14,7 +14,6 @@ const int Buzzer = 13;
 const int ResetButton = A0;
 const int PlayButton = A1;
 
-//Variables
 int ResultGameOne = 0;
 int ResultGameTwo = 0;
 int ResultGameThree = 0;
@@ -93,29 +92,39 @@ void RunResetPattern() {
     }
 }
 
+void blinkMultipleLeds(int* ledPins, int numPins) {
+    unsigned long startTime = millis();
+    while (millis() - startTime < 3000) {
+        for (int i = 0; i < numPins; i++) {
+            digitalWrite(ledPins[i], HIGH);
+        }
+        delay(250);
+        for (int i = 0; i < numPins; i++) {
+            digitalWrite(ledPins[i], LOW);
+        }
+        delay(250);
+    }
+}
+
 void StartGame() {
     turnOffAllLeds();
     BlinkingLights();
     
-    // Run Round 1
     ResultGameOne = RunRound(1);
     blinkSelectedLed(ResultGameOne);
     BlinkingLights();
     
-    // Run Round 2
     ResultGameTwo = RunRound(2);
-    blinkSelectedLed(ResultGameTwo);
+    int round2Leds[] = {ResultGameOne, ResultGameTwo};
+    blinkMultipleLeds(round2Leds, 2);
     
-    // Check if Round 1 and 2 match
     if (compareResults(ResultGameOne, ResultGameTwo)) {
         BlinkingLights();
-        // Run Round 3
         ResultGameThree = RunRound(3);
-        blinkSelectedLed(ResultGameThree);
+        int round3Leds[] = {ResultGameOne, ResultGameTwo, ResultGameThree};
+        blinkMultipleLeds(round3Leds, 3);
         
-        // Check if all rounds match
         if (compareResults(ResultGameOne, ResultGameThree)) {
-            // Victory sequence
             for (int i = 0; i < 5; i++) {
                 BlinkingLights();
                 delay(200);
@@ -126,7 +135,6 @@ void StartGame() {
 }
 
 bool compareResults(int result1, int result2) {
-    // Compare LED positions
     if (result1 == Red1 || result1 == Red2 || result1 == Red3) {
         return (result2 == Red1 || result2 == Red2 || result2 == Red3);
     }
@@ -145,6 +153,9 @@ bool compareResults(int result1, int result2) {
 int RunRound(int roundNumber) {
     int result = 0;
     int leds[4];
+    int baseDelay = 200;
+    int speedIncrease = 50;
+    int currentDelay = baseDelay - ((roundNumber - 1) * speedIncrease);
     
     switch(roundNumber) {
         case 1:
@@ -166,12 +177,12 @@ int RunRound(int roundNumber) {
         digitalWrite(leds[currentLed], HIGH);
         
         if (digitalRead(PlayButton) == HIGH) {
-            delay(50); // Debounce
+            delay(50);
             result = leds[currentLed];
             buttonPressed = true;
         }
         
-        delay(200);
+        delay(currentDelay);
         currentLed = (currentLed + 1) % numLeds;
     }
 
