@@ -130,11 +130,10 @@ void StartGame() {
        // Check if all rounds match
         if (compareResults(ResultGameOne, ResultGameThree)) {
             for (int i = 0; i < 5; i++) {
-            digitalWrite(Buzzer, HIGH);
+          
             blinkWinningLeds(ResultGameOne, ResultGameTwo, ResultGameThree);
             delay(500); 
-            digitalWrite(Buzzer, LOW); // Turn off the buzzer
-                delay(200);
+            
             }
         }
     }
@@ -497,11 +496,13 @@ void blinkSelectedLed(int ledPin) {
         digitalWrite(led1, HIGH);
         digitalWrite(led2, HIGH);
         digitalWrite(led3, HIGH);
+        digitalWrite(Buzzer,HIGH);
         delay(200); 
         
         digitalWrite(led1, LOW);
         digitalWrite(led2, LOW);
         digitalWrite(led3, LOW);
+        digitalWrite(Buzzer,LOW);
         delay(200); 
     }
 
