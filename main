@@ -1,57 +1,508 @@
+const int Green1 = 1;
+const int Green2 = 5;
+const int Green3 = 9;
+const int Red1 = 2;
+const int Red2 = 6;
+const int Red3 = 10;
+const int Yellow1 = 3;
+const int Yellow2 = 7;
+const int Yellow3 = 11;
+const int Blue1 = 4;
+const int Blue2 = 8;
+const int Blue3 = 12;
+const int Buzzer = 13;
+const int ResetButton = A0;
+const int PlayButton = A1;
 
-  const int Green1 = 1;
-  const int Green2 = 5;
-  const int Green3 = 9;
+int ResultGameOne = 0;
+int ResultGameTwo = 0;
+int ResultGameThree = 0;
+const int numLeds = 4;
+bool gameStarted = false;
 
-  const int Red1 = 2;
-  const int Red2 = 6;
-  const int Red3 = 10;
-
-  const int Yellow1 = 3;
-  const int Yellow2 = 7;
-  const int Yellow3 = 11;
-
-  const int Blue1 = 4;
-  const int Blue2 = 8;
-  const int Blue3 = 12;
-
-  const int Buzzer = 13;
-  const int ResetButton = A0;
-  const int PlayButton = A1;
-
-  //Variables
-  int ResultGameOne = 0;
-  int ResultGameTwo = 0;
-  int ResultGameThree = 0;
- const int numLeds = 4; // Number of LEDs in round 
 void setup() {
-  // put your setup code here, to run once:
-    pinMode (Green1,OUTPUT);
-    pinMode (Green2,OUTPUT);
-    pinMode (Green3,OUTPUT);
-    pinMode (Red1,OUTPUT);
-    pinMode (Red2,OUTPUT);
-    pinMode (Red3,OUTPUT);
-    pinMode (Yellow1,OUTPUT);
-    pinMode (Yellow2,OUTPUT);
-    pinMode (Yellow3,OUTPUT);
-    pinMode (Blue1,OUTPUT);
-    pinMode (Blue2,OUTPUT);
-    pinMode (Blue3,OUTPUT);
-
-    pinMode (PlayButton, INPUT);
-    pinMode (ResetButton, INPUT);
-    pinMode (Buzzer,OUTPUT);
-
-    
-
-}   
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
+    pinMode(Green1, OUTPUT);
+    pinMode(Green2, OUTPUT);
+    pinMode(Green3, OUTPUT);
+    pinMode(Red1, OUTPUT);
+    pinMode(Red2, OUTPUT);
+    pinMode(Red3, OUTPUT);
+    pinMode(Yellow1, OUTPUT);
+    pinMode(Yellow2, OUTPUT);
+    pinMode(Yellow3, OUTPUT);
+    pinMode(Blue1, OUTPUT);
+    pinMode(Blue2, OUTPUT);
+    pinMode(Blue3, OUTPUT);
+    pinMode(PlayButton, INPUT);
+    pinMode(ResetButton, INPUT);
+    pinMode(Buzzer, OUTPUT);
 }
 
+void loop() {
+    if (digitalRead(ResetButton) == HIGH) {
+        gameStarted = false;
+        turnOffAllLeds();
+        delay(200);
+        ResultGameOne = 0;
+        ResultGameTwo = 0;
+        ResultGameThree = 0;
+    }
 
-  
+    if (gameStarted) {
+        StartGame();
+        gameStarted = false;
+    } else {
+        if (digitalRead(PlayButton) == HIGH) {
+            delay(50);
+            gameStarted = true;
+            turnOffAllLeds();
+        } else {
+            RunResetPattern();
+        }
+    }
+}
 
+bool checkPlayButton() {
+    if (digitalRead(PlayButton) == HIGH) {
+        delay(50);
+        turnOffAllLeds();
+        return true;
+    }
+    return false;
+}
+
+void RunResetPattern() {
+    int pattern = random(5);
+    switch (pattern) {
+        case 0:
+            if (PerCircleOne()) return;
+            break;
+        case 1:
+            if (Spiral()) return;
+            break;
+        case 2:
+            if (PerCircleTwo()) return;
+            break;
+        case 3:
+            if (Slant()) return;
+            break;
+        case 4:
+            if (PerColor()) return;
+            break;
+    }
+}
+
+void blinkMultipleLeds(int* ledPins, int numPins) {
+    unsigned long startTime = millis();
+    while (millis() - startTime < 3000) {
+        for (int i = 0; i < numPins; i++) {
+            digitalWrite(ledPins[i], HIGH);
+        }
+        delay(250);
+        for (int i = 0; i < numPins; i++) {
+            digitalWrite(ledPins[i], LOW);
+        }
+        delay(250);
+    }
+}
+
+void StartGame() {
+    turnOffAllLeds();
+    BlinkingLights();
+    
+  	// Run Round 1
+    ResultGameOne = RunRound(1);
+    blinkSelectedLed(ResultGameOne);
+    BlinkingLights();
+    
+  	// Run Round 2
+    ResultGameTwo = RunRound(2);
+    int round2Leds[] = {ResultGameOne, ResultGameTwo};
+    blinkMultipleLeds(round2Leds, 2);
+    
+  	// Check if Round 1 and 2 match
+    if (compareResults(ResultGameOne, ResultGameTwo)) {
+        BlinkingLights();
+        ResultGameThree = RunRound(3);
+        int round3Leds[] = {ResultGameOne, ResultGameTwo, ResultGameThree};
+        blinkMultipleLeds(round3Leds, 3);
+        
+       // Check if all rounds match
+        if (compareResults(ResultGameOne, ResultGameThree)) {
+            for (int i = 0; i < 5; i++) {
+            digitalWrite(Buzzer, HIGH);
+            blinkWinningLeds(ResultGameOne, ResultGameTwo, ResultGameThree);
+            delay(500); 
+            digitalWrite(Buzzer, LOW); // Turn off the buzzer
+                delay(200);
+            }
+        }
+    }
+    delay(1000);
+}
+
+bool compareResults(int result1, int result2) {
+    if (result1 == Red1 || result1 == Red2 || result1 == Red3) {
+        return (result2 == Red1 || result2 == Red2 || result2 == Red3);
+    }
+    if (result1 == Blue1 || result1 == Blue2 || result1 == Blue3) {
+        return (result2 == Blue1 || result2 == Blue2 || result2 == Blue3);
+    }
+    if (result1 == Green1 || result1 == Green2 || result1 == Green3) {
+        return (result2 == Green1 || result2 == Green2 || result2 == Green3);
+    }
+    if (result1 == Yellow1 || result1 == Yellow2 || result1 == Yellow3) {
+        return (result2 == Yellow1 || result2 == Yellow2 || result2 == Yellow3);
+    }
+    return false;
+}
+
+int RunRound(int roundNumber) {
+    int result = 0;
+    int leds[4];
+    int baseDelay = 200;
+    int speedIncrease = 50;
+    int currentDelay = baseDelay - ((roundNumber - 1) * speedIncrease);
+    
+    switch(roundNumber) {
+        case 1:
+            leds[0] = Red1; leds[1] = Yellow1; leds[2] = Blue1; leds[3] = Green1;
+            break;
+        case 2:
+            leds[0] = Red2; leds[1] = Yellow2; leds[2] = Blue2; leds[3] = Green2;
+            // Keep Round 1's LED on
+            digitalWrite(ResultGameOne, HIGH);
+            break;
+        case 3:
+            leds[0] = Red3; leds[1] = Yellow3; leds[2] = Blue3; leds[3] = Green3;
+            // Keep Round 1 and 2's LEDs on
+            digitalWrite(ResultGameOne, HIGH);
+            digitalWrite(ResultGameTwo, HIGH);
+            break;
+    }
+
+    bool buttonPressed = false;
+    int currentLed = 0;
+
+    while (!buttonPressed) {
+        // Turn off current round's LEDs only
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(leds[i], LOW);
+        }
+        digitalWrite(leds[currentLed], HIGH);
+        
+        if (digitalRead(PlayButton) == HIGH) {
+            delay(50);
+            result = leds[currentLed];
+            buttonPressed = true;
+        }
+        
+        delay(currentDelay);
+        currentLed = (currentLed + 1) % numLeds;
+    }
+
+    turnOffAllLeds();
+    return result;
+}
+
+bool PerCircleOne() {
+    int Circle1[] = {Green1, Yellow1, Blue1, Red1};
+    int Circle2[] = {Green2, Yellow2, Blue2, Red2};
+    int Circle3[] = {Green3, Yellow3, Blue3, Red3};
+
+    for (int cycle = 0; cycle < 3; cycle++) {
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle1[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle1[i], LOW);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle2[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle2[i], LOW);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle3[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle3[i], LOW);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle2[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle2[i], LOW);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle1[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle1[i], LOW);
+        }
+    }
+    return false;
+}
+
+bool PerCircleTwo() {
+    int Circle1[] = {Green3, Yellow3, Blue3, Red3};
+    int Circle2[] = {Green2, Yellow2, Blue2, Red2, Green1, Yellow1, Blue1, Red1};
+    
+    for (int cycle = 0; cycle < 3; cycle++) {
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle1[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle1[i], LOW);
+        }
+
+        for (int i = 0; i < 8; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle2[i], HIGH);
+        }
+        delay(500);
+        for (int i = 0; i < 8; i++) {
+            digitalWrite(Circle2[i], LOW);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Circle1[i], HIGH);
+        }
+        delay(500);
+        for (int i = 0; i < 4; i++) {
+            digitalWrite(Circle1[i], LOW);
+        }
+    }
+    return false;
+}
+
+bool PerColor() {
+    int Blue[] = {Blue1, Blue2, Blue3};
+    int Green[] = {Green1, Green2, Green3};
+    int Red[] = {Red1, Red2, Red3};
+    int Yellow[] = {Yellow1, Yellow2, Yellow3};
+
+    for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Blue[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 3; i++) {
+            digitalWrite(Blue[i], LOW);
+        }
+        delay(300);
+
+        for (int i = 0; i < 3; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Green[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 3; i++) {
+            digitalWrite(Green[i], LOW);
+        }
+        delay(300);
+
+        for (int i = 0; i < 3; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Red[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 3; i++) {
+            digitalWrite(Red[i], LOW);
+        }
+        delay(300);
+
+        for (int i = 0; i < 3; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(Yellow[i], HIGH);
+        }
+        delay(300);
+        for (int i = 0; i < 3; i++) {
+            digitalWrite(Yellow[i], LOW);
+        }
+        delay(300);
+    }
+    return false;
+}
+
+bool Slant() {
+    int slant1[] = {Blue1, Green2, Green1};
+    int slant2[] = {Blue3, Green3};
+    int slant3[] = {Blue2, Red2};
+    int slant4[] = {Red3, Yellow3};
+    int slant5[] = {Yellow2, Yellow1, Red1};
+
+    for (int cycle = 0; cycle < 3; cycle++) {
+        for (int i = 0; i < 3; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(slant1[i], HIGH);
+        }
+        delay(200); 
+        for (int i = 0; i < 3; i++) {
+            digitalWrite(slant1[i], LOW);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(slant2[i], HIGH);
+        }
+        delay(200);  
+        for (int i = 0; i < 2; i++) {
+            digitalWrite(slant2[i], LOW);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(slant3[i], HIGH);
+        }
+        delay(200);
+        for (int i = 0; i < 2; i++) {
+            digitalWrite(slant3[i], LOW);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(slant4[i], HIGH);
+        }
+        delay(200);
+        for (int i = 0; i < 2; i++) {
+            digitalWrite(slant4[i], LOW);
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            if (checkPlayButton()) return true;
+            digitalWrite(slant5[i], HIGH);
+        }
+        delay(200); 
+        for (int i = 0; i < 3; i++) {
+            digitalWrite(slant5[i], LOW);
+        }
+    }
+    return false;
+}
+
+bool Spiral() {
+    for (int j = 0; j < 3; j++) {
+        if (checkPlayButton()) return true;
+        digitalWrite(Yellow3, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Red3, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Green3, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Blue3, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Blue2, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Yellow1, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Yellow2, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Red1, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Red2, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Green1, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Green2, HIGH);
+        delay(150);
+        if (checkPlayButton()) return true;
+        digitalWrite(Blue1, HIGH);
+        delay(150);
+
+        turnOffAllLeds();
+        delay(150);
+    }
+    return false;
+}
+
+void BlinkingLights() {
+    for (int i = 0; i < 3; i++) {
+        delay(100);
+        digitalWrite(Green1, HIGH);
+        digitalWrite(Green2, HIGH);
+        digitalWrite(Green3, HIGH);
+        digitalWrite(Red1, HIGH);
+        digitalWrite(Red2, HIGH);
+        digitalWrite(Red3, HIGH);
+        digitalWrite(Yellow1, HIGH);
+        digitalWrite(Yellow2, HIGH);
+        digitalWrite(Yellow3, HIGH);
+        digitalWrite(Blue1, HIGH);
+        digitalWrite(Blue2, HIGH);
+        digitalWrite(Blue3, HIGH);
+
+        delay(100);
+        turnOffAllLeds();
+        delay(100);
+    }
+}
+
+void turnOffAllLeds() {
+    digitalWrite(Green1, LOW);
+    digitalWrite(Green2, LOW);
+    digitalWrite(Green3, LOW);
+    digitalWrite(Red1, LOW);
+    digitalWrite(Red2, LOW);
+    digitalWrite(Red3, LOW);
+    digitalWrite(Yellow1, LOW);
+    digitalWrite(Yellow2, LOW);
+    digitalWrite(Yellow3, LOW);
+    digitalWrite(Blue1, LOW);
+    digitalWrite(Blue2, LOW);
+    digitalWrite(Blue3, LOW);
+}
+
+void blinkSelectedLed(int ledPin) {
+    unsigned long startTime = millis();
+    while (millis() - startTime < 3000) {
+        digitalWrite(ledPin, HIGH);
+        delay(250);
+        digitalWrite(ledPin, LOW);
+        delay(250);
+    }
+}
+
+  void blinkWinningLeds(int led1, int led2, int led3) {
+    for (int i = 0; i < 4; i++) {
+        digitalWrite(led1, HIGH);
+        digitalWrite(led2, HIGH);
+        digitalWrite(led3, HIGH);
+        delay(200); 
+        
+        digitalWrite(led1, LOW);
+        digitalWrite(led2, LOW);
+        digitalWrite(led3, LOW);
+        delay(200); 
+    }
+
+}
