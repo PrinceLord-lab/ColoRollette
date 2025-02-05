@@ -60,4 +60,5 @@ ColorRoulette is an Arduino-based LED game that follows a sequence of LED patter
 - Using an LCD display for feedback.
 
 ---
-### Created by: [Your Name/Team Name]
+### Created by: Prince Lord M. Mendoza , Joyce Anne Matnao ,  Hannah Lorraine De Leon
+
